@@ -12,10 +12,10 @@
 #define SAFEALLOC(var,Type) if((var=(Type*)malloc(sizeof(Type)))==NULL)err("not enough memory");
 
 typedef enum { END = 0, ID, CT_INT, CT_REAL, CT_CHAR, CT_STRING,
-			   ADD, SUB, MUL, DIV, DOT, AND, OR, NOT, ASSIGN, EQUAL, NOTEQ, LESS, LESSEQ, GREATER, GREATEREQ,
-			   COMMA, SEMICOLON, LPAR, RPAR, LBRACKET, RBRACKET, LACC, RACC, 
-       		   BREAK, CHAR, DOUBLE, ELSE, FOR, IF, INT, RETURN, STRUCT, VOID, WHILE
-			 } ids;
+	       ADD, SUB, MUL, DIV, DOT, AND, OR, NOT, ASSIGN, EQUAL, NOTEQ, LESS, LESSEQ, GREATER, GREATEREQ,
+               COMMA, SEMICOLON, LPAR, RPAR, LBRACKET, RBRACKET, LACC, RACC, 
+       	       BREAK, CHAR, DOUBLE, ELSE, FOR, IF, INT, RETURN, STRUCT, VOID, WHILE
+	      } ids;
 
 int getNextToken();
 int line = 1;
@@ -39,27 +39,27 @@ typedef struct _Token{
 		long int i;                 // used for CT_INT, CT_CHAR
 		double r;                   // used for CT_REAL
 		};
-	int line;                       // line from entry file
-	struct _Token *next;            // next element in chain
+	int line;                           // line from entry file
+	struct _Token *next;               // next element in chain
 	} Token;
 
-Token *lastToken = NULL, *firstToken =NULL;
+Token *lastToken = NULL, *firstToken = NULL;
 
 Token *addTk(int code)
 {
 	Token *tk;
 	SAFEALLOC(tk,Token)
-	tk->code=code;
-	tk->line=line;
-	tk->next=NULL;
+	tk->code = code;
+	tk->line = line;
+	tk->next = NULL;
 	if(lastToken)
 	{
 	lastToken->next = tk;
 	}else
 	{
-		firstToken = tk;
+        firstToken = tk;
 	}
-	lastToken=tk;
+	lastToken = tk;
 	return tk;
 }
 
@@ -67,48 +67,48 @@ char *getTokenCode(int code)
 {
 	switch(code)
 	{
-		case END: return "END"; break;
-		case ID: return "ID"; break;
-		case CT_INT: return "CT_INT"; break;
-		case CT_REAL: return "CT_REAL"; break;
-		case CT_STRING: return "CT_STRING"; break;
-		case CT_CHAR: return "CT_CHAR"; break;
-		case ADD: return "ADD"; break;
-		case SUB: return "SUB"; break;
-		case DIV: return "DIV"; break;
-		case MUL: return "MUL"; break;
-		case DOT: return "DOT"; break;
-		case AND: return "AND"; break;
-		case OR: return "OR"; break;
-		case NOT: return "NOT"; break;
-		case ASSIGN: return "ASSIGN"; break;
-		case EQUAL: return "EQUAL"; break;
-		case NOTEQ: return "NOTEQ"; break;
-		case LESS: return "LESS"; break;
-		case LESSEQ: return "LESSEQ"; break;
-		case GREATER: return "GREATER"; break;
-		case GREATEREQ: return "GREATEREQ"; break;
-		case COMMA: return "COMMA"; break;
-		case SEMICOLON: return "SEMICOLON"; break;
-		case LPAR: return "LPAR"; break;
-		case RPAR: return "RPAR"; break;
-		case LBRACKET: return "LBRACKET"; break;
-		case RBRACKET: return "RBRACKET"; break;
-		case LACC: return "LACC"; break;
-		case RACC: return "RACC"; break;
-		case BREAK: return "BREAK"; break;
-		case CHAR: return "CHAR"; break;
-		case DOUBLE: return "DOUBLE"; break;
-		case ELSE: return "ELSE"; break;
-		case FOR: return "FOR"; break;
-		case IF: return "IF"; break;
-		case INT: return "INT"; break;
-		case RETURN: return "RETURN"; break;
-		case STRUCT: return "STRUCT"; break;
-		case VOID: return "VOID"; break;
-		case WHILE: return "WHILE"; break;
+		case END : return "END"; break;
+		case ID : return "ID"; break;
+		case CT_INT : return "CT_INT"; break;
+		case CT_REAL : return "CT_REAL"; break;
+		case CT_STRING : return "CT_STRING"; break;
+		case CT_CHAR : return "CT_CHAR"; break;
+		case ADD : return "ADD"; break;
+		case SUB : return "SUB"; break;
+		case DIV : return "DIV"; break;
+		case MUL : return "MUL"; break;
+		case DOT : return "DOT"; break;
+		case AND : return "AND"; break;
+		case OR : return "OR"; break;
+		case NOT : return "NOT"; break;
+		case ASSIGN : return "ASSIGN"; break;
+		case EQUAL : return "EQUAL"; break;
+		case NOTEQ : return "NOTEQ"; break;
+		case LESS : return "LESS"; break;
+		case LESSEQ : return "LESSEQ"; break;
+		case GREATER : return "GREATER"; break;
+		case GREATEREQ : return "GREATEREQ"; break;
+		case COMMA : return "COMMA"; break;
+		case SEMICOLON : return "SEMICOLON"; break;
+		case LPAR : return "LPAR"; break;
+		case RPAR : return "RPAR"; break;
+		case LBRACKET : return "LBRACKET"; break;
+		case RBRACKET : return "RBRACKET"; break;
+		case LACC : return "LACC"; break;
+		case RACC : return "RACC"; break;
+		case BREAK : return "BREAK"; break;
+		case CHAR : return "CHAR"; break;
+		case DOUBLE : return "DOUBLE"; break;
+		case ELSE : return "ELSE"; break;
+		case FOR : return "FOR"; break;
+		case IF : return "IF"; break;
+		case INT : return "INT"; break;
+		case RETURN : return "RETURN"; break;
+		case STRUCT : return "STRUCT"; break;
+		case VOID : return "VOID"; break;
+		case WHILE : return "WHILE"; break;
 
-		default: return "Invalid code value!"; break;
+		default : return "Invalid code value!"; break;
 		
 	}
 }
@@ -116,23 +116,23 @@ char *getTokenCode(int code)
 void displayTokens()
 {
 	Token *currentToken;
-	for(currentToken = firstToken; currentToken!=NULL; currentToken = currentToken->next)
+	for(currentToken = firstToken; currentToken != NULL; currentToken = currentToken->next)
 	{
 		printf(" %d %s ", currentToken->line, getTokenCode((currentToken->code)));
 		switch(currentToken->code)
 		{
 			case ID: printf(" :  %s", currentToken->text);
-					 break;
+			         break;
 			case CT_INT: printf(" :  %ld", currentToken->i);
-						 break;
+				     break;
 			case CT_CHAR: printf(" :  %c", currentToken->i);
-						  break;
+				      break;
 			case CT_REAL: printf(" :  %g", currentToken->r);
-						  break;
+				      break;
 			case CT_STRING:	printf(" :  %s", currentToken->text);
-						    break;
+					break;
 
-			default: break;
+			default : break;
 		}
 		printf("\n");
 	}
@@ -152,7 +152,7 @@ void tkerr(const Token *tk,const char *fmt, ...)
 char *createString(char *startCh, char *endCh)
 {
     char *result = (char*)malloc((endCh-startCh)*sizeof(char));
-    int index=0;
+    int index = 0;
     char aux;
 
     while((endCh-startCh) > 0)
@@ -174,6 +174,7 @@ char *createString(char *startCh, char *endCh)
 			if(aux == '\\') result[index] = '\\';
 			
 			if(!isalpha(aux)) result[index] = aux;
+			
 			startCh++;
 		}
 		else result[index] = *startCh;
@@ -854,7 +855,7 @@ int main(int argc, char **argv)
 		exit(-2);
 	}
 
-    text[n] = '\0';
+   	text[n] = '\0';
 	printf("%s\n", text);
 	
 	pCrtCh = text;
